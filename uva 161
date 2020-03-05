@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+typedef unsigned long long ull;
+typedef long long ll;
+typedef pair<int, int> ii;
+typedef vector<ii> vii;
+typedef vector<int> vi;
+typedef vector<ll> vll;
+
+#define PI (2*acos(0.0))
+#define eps 1e-9
+#define pb push_back
+#define endl "\n"
+#define watch(x) cout << (#x) << " is " << (x) << endl;
+#define show(v) for(int fi = 0; fi < v.size(); fi++) cout << v[fi] << " "; cout << endl;
+#define showpair(v) for(int fi = 0; fi < v.size(); fi++) cout << v[fi].first << " " << v[fi].second << endl;
+#define ff first
+#define ss second
+#define fu cout << "lol" << endl;
+#define precision(n) cout << fixed << setprecision(n);
+#define lb lower_bound
+#define up upper_bound
+#define vscan for(i = 0;i<n;i++){cin>>in; v.pb(in);}
+#define all(a) a.begin(), a.end()
+#define min3(a,b,c) min(a,min(b,c))
+#define max3(a,b,c) max(a,max(b,c))
+#define mem(a,val) memset(a,val,sizeof(a))
+#define loop(i,n) for(i = 0; i < n; i++)
+#define TC() ull T; cin>>T; while(T--)
+#define IN(x) {scanf("%d",&x);}
+#define LL(x) {scanf("%lld",&x);}
+#define CC(x) {scanf("%c",&x);}
+#define pfl(x) printf("%d\n",x)
+#define pfll(x) printf("%lld\n",x)
+#define newl puts("")
+#define space printf(" ")
+#define MOD 1000000007
+#define speed ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+
+int main()
+{
+    int i = 0, j = 0;
+    vi v; int in;
+    while(cin>>in){
+        if(in == 0){
+            if(v.size() == 0){
+                cin>>in>>in; return 0;
+            }
+            int m = *min_element(all(v));
+            int init = m + 1;
+            int arr[v.size()+5];
+            for(i = 0; i < v.size(); i++){
+                if(v[i] < init) arr[i] = 0;
+                else if(v[i] - 5 < init) arr[i] = 1;
+                else arr[i] = 2;
+            }
+            bool f = 0;
+            for(init++; init <= 5*60*60 + 1; init++){
+                for(i = 0; i < v.size(); i++){
+                    int x = init / v[i];
+                    if(v[i]*x + 1 == init){
+                        if(arr[i] == 0) arr[i] = 2;
+                        else if(arr[i] == 1) arr[i] = 0;
+                        continue;
+                    }
+                    if(v[i]*x + v[i] - 5 < init && arr[i] == 2) arr[i] = 1;
+                }
+                for(i = 0; i < v.size(); i++) if(arr[i] != 2) break;
+                if(i == v.size()){
+                    init--;
+                    f = 1;
+                    int h = init / 3600;
+                    init -= h*3600;
+                    int m = init/60;
+                    init -= m*60;
+                    cout << 0 << h << ":";
+                    if(m < 10) cout << 0;
+                    cout << m << ":";
+                    if(init < 10) cout << 0;
+                    cout << init << endl;
+                    break;
+                }
+            }
+            if(!f) cout << "Signals fail to synchronise in 5 hours" << endl;
+            v.clear();
+            continue;
+        }
+        v.pb(in);
+    }
+    return 0;
+}
