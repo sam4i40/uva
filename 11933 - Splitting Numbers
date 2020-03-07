@@ -38,8 +38,6 @@ typedef vector<ll> vll;
 #define space printf(" ")
 #define MOD 1000000007
 #define speed ios_base::sync_with_stdio(false); cin.tie(NULL);
-#define valid cout << "NO CONFLICT" << endl;
-#define invalid cout << "CONFLICT" << endl;
 
 ll toint(vi &a){
     ll ret = 0;
