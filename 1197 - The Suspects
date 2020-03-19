@@ -39,6 +39,10 @@ typedef vector<ll> vll;
 #define MOD 1000000007
 #define speed ios_base::sync_with_stdio(false); cin.tie(NULL);
 
+
+                                /* SOLUTION USING IMPLEMENTATION / BFS CONCEPT */
+                                
+
 int main()
 {
     int i = 0, j = 0, cs = 0, in;
@@ -71,6 +75,46 @@ int main()
                 }
                 vis[i] = true;
             }
+        }
+        cout << cnt << endl;
+    }
+    return 0;
+}
+
+
+                                    /* SOLUTION USING DISJOINT SET UNION FIND */
+                                    
+
+const int N = 3e4 + 10;
+vi v(N);
+
+int par(int a){
+    if(v[a] == a) return a;
+    return v[a] = par(v[a]);
+}
+
+void uni(int a, int b){
+    a = par(a);
+    b = par(b);
+    if(a != b) v[a] = b;
+}
+
+int main()
+{
+    int i = 0, j = 0, cs = 0, in;
+    int n, m;
+    while(cin>>n>>m, n | m){
+        for(i = 0; i < n; i++) v[i] = i;
+        for(i = 0; i < m; i++){
+            int k; cin>>k; int a; cin>>a;
+            for(j = 0; j < k-1; j++){
+                int in; cin>>in; uni(a,in);
+            }
+        }
+        int pp = par(0);
+        int cnt = 1;
+        for(i = 1; i < n; i++){
+            if(par(i) == pp) cnt++;
         }
         cout << cnt << endl;
     }
