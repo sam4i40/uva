@@ -39,6 +39,8 @@ typedef vector<ll> vll;
 #define MOD 1000000007
 #define speed ios_base::sync_with_stdio(false); cin.tie(NULL);
 
+                                        /*     ITERATIVE METHOD     */
+                                        
 
 int main()
 {
@@ -61,6 +63,36 @@ int main()
             }
         }
         if(f) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+    return 0;
+}
+
+
+                                    /*     RECURSIVE METHOD     */
+                                    
+                                    
+vi v;
+int n, p;
+
+bool f(int pos, ll sum){
+    if(pos >= p){
+        if(sum == n) return true;
+        return false;
+    }
+    return f(pos+1,sum) | f(pos+1,sum+v[pos]);
+}
+
+int main()
+{
+    int i = 0, j = 0, cs = 0, in;
+    TC(){
+        v.clear();
+        cin>>n>>p;
+        for(i = 0; i < p; i++){
+            int in; cin>>in; v.pb(in);
+        }
+        if(f(0,0)) cout << "YES" << endl;
         else cout << "NO" << endl;
     }
     return 0;
